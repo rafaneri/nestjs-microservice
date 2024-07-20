@@ -72,7 +72,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@wallet/domain/domain(|/.*)$": "<rootDir>/libs/domain/src/$1"
+      "^@wallet/domain/domain(|/.*)$": "<rootDir>/libs/domain/src/$1",
+      "^@wallet/bootstrap-config(|/.*)$": "<rootDir>/libs/bootstrap-config/src/$1"
     }
   }
 }

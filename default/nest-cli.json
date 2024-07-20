@@ -54,6 +54,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/update-balance/tsconfig.app.json"
       }
+    },
+    "bootstrap-config": {
+      "type": "library",
+      "root": "libs/bootstrap-config",
+      "entryFile": "index",
+      "sourceRoot": "libs/bootstrap-config/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/bootstrap-config/tsconfig.lib.json"
+      }
     }
   }
 }

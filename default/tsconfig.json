@@ -18,8 +18,18 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@wallet/domain": ["libs/domain/src"],
-      "@wallet/domain/*": ["libs/domain/src/*"]
+      "@wallet/domain": [
+        "libs/domain/src"
+      ],
+      "@wallet/domain/*": [
+        "libs/domain/src/*"
+      ],
+      "@wallet/bootstrap-config": [
+        "libs/bootstrap-config/src"
+      ],
+      "@wallet/bootstrap-config/*": [
+        "libs/bootstrap-config/src/*"
+      ]
     }
   }
 }
