@@ -1,0 +1,24 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-wallet
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+  db:
+    image: mongo
+    restart: always
+    container_name: mongodb-wallet
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - "./db/data/db-files:/data/db"
+      - "./db/init/:/docker-entrypoint-initdb.d/"
+    ports:
+      - 27017:27017
+
+volumes:
+  rabbitmq_data:
