@@ -1,12 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiGatewayService } from './api-gateway.service';
+import { Controller, Get, Inject, Param, ParseIntPipe } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { ClientAlias } from './client.enum';
+import { ActionType } from '@wallet/domain';
 
-@Controller()
+@Controller('wallet')
 export class ApiGatewayController {
-  constructor(private readonly apiGatewayService: ApiGatewayService) {}
+  constructor(
+    @Inject(ClientAlias.BALANCE)
+    private getBalanceClient: ClientProxy,
+  ) {}
 
-  @Get()
-  getHello(): string {
-    return this.apiGatewayService.getHello();
+  @Get('/:wallet/balance')
+  getBalance(@Param('wallet', ParseIntPipe) wallet: number) {
+    return this.getBalanceClient.send(ActionType.GET_BALLANCE, wallet);
   }
 }

@@ -1,11 +1,27 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApiGatewayController } from './api-gateway.controller';
-import { ApiGatewayService } from './api-gateway.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientAlias } from './client.enum';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot(),
+    ClientsModule.registerAsync([
+      {
+        name: ClientAlias.BALANCE,
+        imports: [ConfigModule],
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: configService.get('TCP_HOST'),
+            port: configService.get('GET_BALANCE_PORT'),
+          },
+        }),
+        inject: [ConfigService],
+      },
+    ]),
+  ],
   controllers: [ApiGatewayController],
-  providers: [ApiGatewayService],
 })
 export class ApiGatewayModule {}
