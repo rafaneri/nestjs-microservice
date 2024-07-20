@@ -27,6 +27,33 @@
       "compilerOptions": {
         "tsConfigPath": "libs/domain/tsconfig.lib.json"
       }
+    },
+    "get-balance": {
+      "type": "application",
+      "root": "apps/get-balance",
+      "entryFile": "main",
+      "sourceRoot": "apps/get-balance/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/get-balance/tsconfig.app.json"
+      }
+    },
+    "list-statement": {
+      "type": "application",
+      "root": "apps/list-statement",
+      "entryFile": "main",
+      "sourceRoot": "apps/list-statement/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/list-statement/tsconfig.app.json"
+      }
+    },
+    "update-balance": {
+      "type": "application",
+      "root": "apps/update-balance",
+      "entryFile": "main",
+      "sourceRoot": "apps/update-balance/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/update-balance/tsconfig.app.json"
+      }
     }
   }
 }
