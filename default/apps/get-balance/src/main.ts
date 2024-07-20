@@ -1,15 +1,9 @@
-import { Logger, Module } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import { BootstrapConfigModule } from '@wallet/bootstrap-config';
 import { GetBalanceModule } from './get-balance.module';
-
-@Module({
-  imports: [ConfigModule.forRoot()],
-  providers: [ConfigService],
-  exports: [ConfigService],
-})
-class BootstrapConfigModule {}
 
 async function bootstrap() {
   // Criando um contexto para utilizar o ConfigService
