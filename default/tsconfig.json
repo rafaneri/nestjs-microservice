@@ -18,12 +18,8 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@wallet/domain/domain": [
-        "libs/domain/src"
-      ],
-      "@wallet/domain/domain/*": [
-        "libs/domain/src/*"
-      ]
+      "@wallet/domain": ["libs/domain/src"],
+      "@wallet/domain/*": ["libs/domain/src/*"]
     }
   }
 }
