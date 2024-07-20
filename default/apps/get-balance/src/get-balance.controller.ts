@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { GetBalanceService } from './get-balance.service';
+import { ActionType } from '@wallet/domain';
 
 @Controller()
 export class GetBalanceController {
   constructor(private readonly getBalanceService: GetBalanceService) {}
 
-  @Get()
-  getHello(): string {
-    return this.getBalanceService.getHello();
+  @MessagePattern(ActionType.GET_BALLANCE)
+  getBalance(wallet: number): number {
+    return this.getBalanceService.getBalance(wallet);
   }
 }
