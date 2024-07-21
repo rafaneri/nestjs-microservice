@@ -15,10 +15,7 @@ describe('ApiGatewayController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/wallet/:wallet/balance (GET)', () => {
+    return request(app.getHttpServer()).get('/wallet/1/balance').expect(200);
   });
 });

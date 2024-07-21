@@ -1,39 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ApiGatewayController } from './api-gateway.controller';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { ClientAlias } from './client.enum';
+import { ServicesModule } from './services/services.module';
 
 describe('ApiGatewayController', () => {
   let apiGatewayController: ApiGatewayController;
+  let module: TestingModule;
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
-      imports: [
-        ClientsModule.registerAsync([
-          {
-            name: ClientAlias.BALANCE,
-            imports: [ConfigModule],
-            useFactory: (configService: ConfigService) => ({
-              transport: Transport.TCP,
-              options: {
-                host: configService.get('TCP_HOST'),
-                port: configService.get('GET_BALANCE_PORT'),
-              },
-            }),
-            inject: [ConfigService],
-          },
-        ]),
-      ],
+    module = await Test.createTestingModule({
+      imports: [ServicesModule],
       controllers: [ApiGatewayController],
     }).compile();
 
-    apiGatewayController = app.get<ApiGatewayController>(ApiGatewayController);
+    apiGatewayController =
+      module.get<ApiGatewayController>(ApiGatewayController);
+    await module.init(); // Initialize the NestJS module
   });
 
+  afterEach(async () => await module.close());
+
   describe('root', () => {
-    it('should be getBalance defined', () => {
-      expect(apiGatewayController.getBalance(1)).toBeDefined();
+    it('should result "1"', async () => {
+      const result = await apiGatewayController.getBalance(1);
+      expect(result).toBe(1);
     });
   });
 });
