@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { ListStatementService } from './list-statement.service';
+import { ActionType, TransactionInterface } from '@wallet/domain';
 
 @Controller()
 export class ListStatementController {
   constructor(private readonly listStatementService: ListStatementService) {}
 
-  @Get()
-  getHello(): string {
-    return this.listStatementService.getHello();
+  @MessagePattern(ActionType.LIST_STATEMENT)
+  listStatement(wallet: string): TransactionInterface[] {
+    return this.listStatementService.listStatement(wallet);
   }
 }

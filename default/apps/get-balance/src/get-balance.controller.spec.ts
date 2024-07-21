@@ -16,7 +16,7 @@ describe('GetBalanceController', () => {
 
   describe('root', () => {
     it('should be defined', () => {
-      expect(getBalanceController.getBalance(1)).toBeDefined();
+      expect(getBalanceController.getBalance('1')).toBeDefined();
     });
   });
 });

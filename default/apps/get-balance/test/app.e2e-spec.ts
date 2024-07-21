@@ -38,7 +38,7 @@ describe('GetBalanceController (e2e)', () => {
   });
 
   it('test @MessagePattern(ActionType.GET_BALLANCE)', (done) => {
-    const response: Observable<any> = client.send(ActionType.GET_BALLANCE, 1);
+    const response: Observable<any> = client.send(ActionType.GET_BALLANCE, '1');
 
     response.subscribe((balance) => {
       expect(balance).toBe(1);

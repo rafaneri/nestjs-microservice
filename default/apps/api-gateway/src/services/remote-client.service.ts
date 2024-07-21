@@ -26,10 +26,10 @@ export abstract class RemoteClientService
     this.client.close();
   }
 
-  async sendMessage(pattern: string, data: any) {
+  async sendMessage<T, V>(pattern: string, data: any) {
     return firstValueFrom(
       this.client
-        .send(pattern, data)
+        .send<T, V>(pattern, data)
         .pipe(timeout(5000))
         .pipe(
           catchError((err) => {

@@ -45,6 +45,30 @@ services:
       - ${GET_BALANCE_PORT}:${GET_BALANCE_PORT}
     expose:
       - ${GET_BALANCE_PORT}
+  list-statement:
+    hostname: localhost
+    container_name: list-statement
+    build:
+      context: .
+      target: development
+    command: npm run start:dev list-statement
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/get-balance
+          target: /usr/src/app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    ports:
+      - ${LIST_STATEMENT_PORT}:${LIST_STATEMENT_PORT}
+    expose:
+      - ${LIST_STATEMENT_PORT}
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq-wallet

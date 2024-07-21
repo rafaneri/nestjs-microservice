@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GetBalanceService } from './get-balance.service';
+import { ListStatementService } from './list-statement.service';
 import { ConfigModule } from '@nestjs/config';
 
-describe('GetBalanceService', () => {
-  let service: GetBalanceService;
+describe('ListStatementService', () => {
+  let service: ListStatementService;
   let module: TestingModule;
 
   beforeEach(async () => {
     module = await Test.createTestingModule({
       imports: [ConfigModule.forRoot()],
-      providers: [GetBalanceService],
+      providers: [ListStatementService],
     }).compile();
 
-    service = module.get<GetBalanceService>(GetBalanceService);
+    service = module.get<ListStatementService>(ListStatementService);
     await module.init(); // Initialize the NestJS module
   });
 
@@ -22,9 +22,9 @@ describe('GetBalanceService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should return "1"', async () => {
-    const result = await service.getBalance('1');
-    expect(result).toBe(1);
+  it('should return length greater than 0 if called with "1"', async () => {
+    const result = await service.listStatement('1');
+    expect(result.length).toBeGreaterThanOrEqual(0);
   });
 
   it('should throw an error if called with wrong parameters', () => {

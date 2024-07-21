@@ -11,12 +11,14 @@ describe('ListStatementController', () => {
       providers: [ListStatementService],
     }).compile();
 
-    listStatementController = app.get<ListStatementController>(ListStatementController);
+    listStatementController = app.get<ListStatementController>(
+      ListStatementController,
+    );
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(listStatementController.getHello()).toBe('Hello World!');
+    it('should be defined', () => {
+      expect(listStatementController.listStatement('1')).toBeDefined();
     });
   });
 });
