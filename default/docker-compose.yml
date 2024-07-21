@@ -1,0 +1,70 @@
+services:
+  api-gateway:
+    hostname: localhost
+    container_name: api-gateway
+    build:
+      context: .
+      target: development
+    command: npm run start:dev api-gateway
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/api-gateway
+          target: /usr/src/app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+  get-balance:
+    hostname: localhost
+    container_name: get-balance
+    build:
+      context: .
+      target: development
+    command: npm run start:dev get-balance
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/get-balance
+          target: /usr/src/app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    ports:
+      - ${GET_BALANCE_PORT}:${GET_BALANCE_PORT}
+    expose:
+      - ${GET_BALANCE_PORT}
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-wallet
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb-wallet
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - './db/data/db-files:/data/db'
+      - './db/init/:/docker-entrypoint-initdb.d/'
+    ports:
+      - 27017:27017
+
+volumes:
+  rabbitmq_data:
