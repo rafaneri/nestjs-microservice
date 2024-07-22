@@ -14,10 +14,10 @@ export interface TransactionInterface extends EntityInterface {
   type: TransactionType;
   /**
    * @description Identificador da carteira
-   * @type {string}
+   * @type {any}
    * @memberof TransactionInterface
    */
-  wallet: string;
+  wallet: any;
   /**
    * @description Tipo do evento que ocorreu
    * @type {EventType}

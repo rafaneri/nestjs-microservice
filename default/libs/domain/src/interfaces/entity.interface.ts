@@ -4,7 +4,7 @@
 export interface EntityInterface {
   /**
    * @description Identificador da entidade
-   * @type {string}
+   * @type {any}
    * @memberof EntityInterface
    * @readonly
    */

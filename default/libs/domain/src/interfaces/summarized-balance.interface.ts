@@ -6,10 +6,10 @@ import { EntityInterface } from './entity.interface';
 export interface SummarizedBalanceInterface extends EntityInterface {
   /**
    * @description Identificador da carteira
-   * @type {string}
+   * @type {any}
    * @memberof SummarizedBalanceInterface
    */
-  wallet: string;
+  wallet: any;
   /**
    * @description Saldo da carteira
    * @type {number}

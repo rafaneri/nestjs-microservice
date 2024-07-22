@@ -7,10 +7,10 @@ import { SummarizedBalanceInterface } from './summarized-balance.interface';
 export interface WalletInterface extends EntityInterface {
   /**
    * @description Código identificador da carteira
-   * @type {number}
+   * @type {string}
    * @memberof WalletInterface
    */
-  code: number;
+  code: string;
   /**
    * @description Saldo da carteira
    * @type {number}
