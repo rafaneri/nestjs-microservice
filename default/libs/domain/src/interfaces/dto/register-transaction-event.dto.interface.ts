@@ -1,5 +1,5 @@
-import { EventType } from '../enum/event-type.enum';
-import { TransactionType } from '../enum/transacrion-type.enum';
+import { EventType } from '../../enum/event-type.enum';
+import { TransactionType } from '../../enum/transacrion-type.enum';
 
 /**
  * @description Interface de transferência de dados para registrar o evento de uma transação vinda do cliente

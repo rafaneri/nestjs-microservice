@@ -8,19 +8,19 @@ export interface EntityInterface {
    * @memberof EntityInterface
    * @readonly
    */
-  _id: string;
+  _id?: any;
   /**
    * @description Data de crição da entidade
    * @type {Date}
    * @memberof EntityInterface
    * @default new Date()
    */
-  createdAt: Date;
+  createdAt?: Date;
   /**
    * @description Data de atualização da entidade
    * @type {Date}
    * @memberof EntityInterface
    * @default new Date()
    */
-  updatedAt: Date;
+  updatedAt?: Date;
 }
