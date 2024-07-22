@@ -5,14 +5,12 @@ import {
   ClientProxy,
   ClientProxyFactory,
 } from '@nestjs/microservices';
-import { firstValueFrom } from 'rxjs';
-import { catchError, timeout } from 'rxjs/operators';
 
 @Injectable()
 export abstract class RemoteClientService
   implements OnModuleInit, OnModuleDestroy
 {
-  private client: ClientProxy;
+  protected client: ClientProxy;
 
   constructor(protected configService: ConfigService) {}
 
@@ -24,18 +22,5 @@ export abstract class RemoteClientService
 
   onModuleDestroy() {
     this.client.close();
-  }
-
-  async sendMessage<T, V>(pattern: string, data: any) {
-    return firstValueFrom(
-      this.client
-        .send<T, V>(pattern, data)
-        .pipe(timeout(5000))
-        .pipe(
-          catchError((err) => {
-            throw err;
-          }),
-        ),
-    );
   }
 }
