@@ -9,7 +9,8 @@ The project consists of the following applications:
 1. **API Gateway**: Routes requests to the respective microservices.
 2. **Get Balance**: A microservice based on TCP transport to obtain the account balance.
 3. **List Statement**: A microservice based on TCP transport to obtain the account statement.
-4. **Update Balance**: A microservice that uses RabbitMQ as a broker to update the account balance.
+4. **Update Balance**: A microservice that uses RabbitMQ as a broker to register and dispatch events update for an account.
+5. **Wallet Updater**: A microservice that uses RabbitMQ as a broker to update the account balance and statements.
 
 ## Endpoints
 
@@ -17,7 +18,8 @@ The API Gateway provides three endpoints for clients to interact with:
 
 - **Get Balance**: Fetches the balance of an account.
 - **List Statement**: Retrieves the statement of an account.
-- **Update Balance**: Updates the balance of an account.
+- **Update Balance**: Register and dispatch transactions update on account.
+- **Wallet Updater**: Summarize, really update balance, manage statements for an account.
 
 Each endpoint executes the action of a corresponding microservice.
 

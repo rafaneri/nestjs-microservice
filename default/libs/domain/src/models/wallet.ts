@@ -14,7 +14,7 @@ export class Wallet extends Entity implements WalletInterface {
   code: string;
 
   @prop({ default: 0 })
-  balance: number;
+  balance?: number;
 
   @prop({ type: () => [SummarizedBalance], default: [] })
   sumarizedBallance?: SummarizedBalance[];

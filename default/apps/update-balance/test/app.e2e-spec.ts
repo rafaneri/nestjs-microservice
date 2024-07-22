@@ -8,6 +8,7 @@ import {
   TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
+import { generateRandomAccount } from '../../../jest.setup';
 
 describe('UpdateBalanceController (e2e)', () => {
   let app: INestApplication;
@@ -59,14 +60,16 @@ describe('UpdateBalanceController (e2e)', () => {
   });
 
   it('test @EventPattern(ActionType.UPDATE_BALLANCE)', () => {
+    const code = generateRandomAccount(10);
     const response = client.send<void, TransactionEventDto>(
       ActionType.UPDATE_BALANCE,
       {
         type: TransactionType.CREDIT,
         event: EventType.DEPOSIT,
-        wallet: '123',
+        wallet: code,
         amount: 20,
         timestamp: new Date().getTime(),
+        description: 'Deposit internet bank',
       },
     );
 

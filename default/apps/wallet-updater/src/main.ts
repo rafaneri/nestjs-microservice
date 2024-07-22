@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { BootstrapConfigModule } from '@wallet/bootstrap-config';
-import { UpdateBalanceModule } from './update-balance.module';
+import { WalletUpdaterModule } from './wallet-updater.module';
 import { isConnected } from '@wallet/repository';
 
 async function bootstrap() {
@@ -17,12 +17,12 @@ async function bootstrap() {
   const configService = appContext.get(ConfigService);
   // Criando microsserviço que utiliza o RabbitMQ como broker
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    UpdateBalanceModule,
+    WalletUpdaterModule,
     {
       transport: Transport.RMQ,
       options: {
         urls: [`${configService.get('RBMQ_URL')}`],
-        queue: `${configService.get('BALLANCE_QUEUE')}`,
+        queue: `${configService.get('WALLET_QUEUE')}`,
         queueOptions: {
           durable: false,
         },
@@ -30,6 +30,6 @@ async function bootstrap() {
     },
   );
   await app.listen();
-  Logger.log(`🔥 Update Balance is Running`, 'MICROSERVICE');
+  Logger.log(`🔥 Wallet Updater is Running`, 'MICROSERVICE');
 }
 bootstrap();

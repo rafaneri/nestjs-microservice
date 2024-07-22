@@ -4,6 +4,7 @@ import { GetBalanceService } from './get-balance.service';
 import { MongoRepository, RepositoryModule } from '@wallet/repository';
 import { Wallet } from '@wallet/domain';
 import { GetBalanceRepository } from './get-balance.repository';
+import { generateRandomAccount } from '../../../jest.setup';
 
 describe('GetBalanceController', () => {
   let getBalanceController: GetBalanceController;
@@ -23,7 +24,7 @@ describe('GetBalanceController', () => {
   });
 
   it('should be "100"', async () => {
-    const walletCode = 'existing_wallet';
+    const walletCode = generateRandomAccount(10);
     const repository = new MongoRepository(Wallet);
     await repository.create({ code: walletCode, balance: 100 });
     const balanceDto = await getBalanceController.getBalance(walletCode);

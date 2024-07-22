@@ -11,6 +11,6 @@ export class ListStatementRepository {
   }
 
   async listStatement(wallet: string): Promise<Transaction[]> {
-    return this.repository.findAll({ code: wallet });
+    return this.repository.findAll({ 'wallet.code': wallet });
   }
 }

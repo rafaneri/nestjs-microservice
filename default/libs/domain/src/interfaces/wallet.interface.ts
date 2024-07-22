@@ -17,7 +17,7 @@ export interface WalletInterface extends EntityInterface {
    * @memberof WalletInterface
    * @default 0
    */
-  balance: number;
+  balance?: number;
   /**
    * @description Resumo do saldo da carteira
    * @type {SummarizedBalanceInterface[]}

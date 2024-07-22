@@ -13,12 +13,12 @@ export class SummarizedBalance
     Object.assign(this, data);
   }
 
-  @prop()
+  @prop({ default: 0 })
   balance: number;
 
-  @prop({ index: 1, ref: () => Wallet })
+  @prop({ index: 1, ref: () => Wallet, required: true })
   wallet: Ref<Wallet>;
 
-  @prop({ index: 1 })
+  @prop({ index: 1, required: true })
   date: string;
 }

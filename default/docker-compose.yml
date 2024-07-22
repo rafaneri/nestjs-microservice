@@ -81,6 +81,22 @@ services:
     networks:
       - app-network
 
+  wallet-updater:
+    container_name: wallet-updater
+    build:
+      context: .
+      target: development
+    command: npm run start:dev wallet-updater
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    depends_on:
+      - rabbitmq
+      - mongodb
+    networks:
+      - app-network
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq-wallet

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ClientOptions, Transport } from '@nestjs/microservices';
 import { ActionType, TransactionEventDto } from '@wallet/domain';
-import { P2PRemoteClientService } from '../p2p-remote-client.service';
+import { P2PRemoteClientService } from '@wallet/microservice-utils';
 
 @Injectable()
 export class ListStatementService extends P2PRemoteClientService {

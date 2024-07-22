@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ClientOptions, Transport } from '@nestjs/microservices';
 import { ActionType, BalanceDto } from '@wallet/domain';
-import { P2PRemoteClientService } from '../p2p-remote-client.service';
+import { P2PRemoteClientService } from '@wallet/microservice-utils';
 
 @Injectable()
 export class GetBalanceService extends P2PRemoteClientService {

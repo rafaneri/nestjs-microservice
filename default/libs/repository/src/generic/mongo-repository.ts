@@ -5,6 +5,7 @@ import {
   ReturnModelType,
 } from '@typegoose/typegoose/lib/types';
 import { Entity } from '../../../domain/src/models/entity';
+import { FilterQuery, UpdateQuery } from 'mongoose';
 
 export class MongoRepository<T extends Entity>
   implements IGenericRepository<T>
@@ -27,16 +28,44 @@ export class MongoRepository<T extends Entity>
     return this.model.findOne(filter, projection).lean<T | null>().exec();
   }
 
-  async findAll(filter = {}, projection?: any): Promise<T[]> {
-    return this.model.find(filter, projection).lean<T[]>().exec();
+  async findAll(
+    filter = {},
+    projection?: any,
+    limit?: number,
+    sort?: any,
+  ): Promise<T[]> {
+    return this.model
+      .find(filter, projection)
+      .sort(sort)
+      .limit(limit)
+      .lean<T[]>()
+      .exec();
   }
 
   async aggregate(pipeline: any[]): Promise<any> {
     return await this.model.aggregate(pipeline).exec();
   }
 
-  async update(id: mongoose.Types.ObjectId | string, data: T): Promise<T> {
-    const entity = await this.model.findByIdAndUpdate(id, data, { new: true });
+  async update(
+    id: mongoose.Types.ObjectId | string,
+    data: Partial<T>,
+  ): Promise<T> {
+    const entity = await this.model.findByIdAndUpdate(id, data, {
+      upsert: true,
+      new: true,
+      setDefaultsOnInsert: true,
+    });
+    return entity.toObject();
+  }
+
+  async updateOne(filter: FilterQuery<T>, data: UpdateQuery<T>): Promise<T> {
+    const entity = await this.model
+      .findOneAndUpdate(filter, data, {
+        upsert: true,
+        new: true,
+        setDefaultsOnInsert: true,
+      })
+      .exec();
     return entity.toObject();
   }
 }

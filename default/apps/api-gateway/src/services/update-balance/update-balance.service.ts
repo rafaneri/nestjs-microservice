@@ -5,7 +5,7 @@ import {
   RegisterTransactionEventDto,
   TransactionEventDto,
 } from '@wallet/domain';
-import { BrokerRemoteClientService } from '../broker-remote-client.service';
+import { BrokerRemoteClientService } from '@wallet/microservice-utils';
 
 @Injectable()
 export class UpdateBalanceService extends BrokerRemoteClientService {
@@ -26,9 +26,9 @@ export class UpdateBalanceService extends BrokerRemoteClientService {
     wallet: string,
     transaction: RegisterTransactionEventDto,
   ) {
-    this.emitMessage<void, TransactionEventDto>(
-      ActionType.UPDATE_BALANCE,
-      { wallet, ...transaction },
-    );
+    this.emitMessage<void, TransactionEventDto>(ActionType.UPDATE_BALANCE, {
+      wallet,
+      ...transaction,
+    });
   }
 }

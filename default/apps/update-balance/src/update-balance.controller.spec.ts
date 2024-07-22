@@ -6,14 +6,32 @@ import {
   TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
+import { UpdateBalanceRepository } from './update-balance.repository';
+import { RepositoryModule } from '@wallet/repository';
+import { generateRandomAccount } from '../../../jest.setup';
+import {
+  ValidateEventsModule,
+  ValidateEventsService,
+} from '@wallet/validate-events';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 describe('UpdateBalanceController', () => {
   let updateBalanceController: UpdateBalanceController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
+      imports: [
+        RepositoryModule,
+        ValidateEventsModule,
+        ConfigModule.forRoot({ isGlobal: true }),
+      ],
       controllers: [UpdateBalanceController],
-      providers: [UpdateBalanceService],
+      providers: [
+        UpdateBalanceService,
+        UpdateBalanceRepository,
+        ValidateEventsService,
+        ConfigService,
+      ],
     }).compile();
 
     updateBalanceController = app.get<UpdateBalanceController>(
@@ -26,19 +44,18 @@ describe('UpdateBalanceController', () => {
   });
 
   it('should handle updateBalance with the correct arguments', async () => {
-    const updateBalanceService = { updateBalance: jest.fn() };
-    const controller = new UpdateBalanceController(updateBalanceService);
+    const controller = { updateBalance: jest.fn() };
     const timestamp = new Date().getTime();
+    const code = generateRandomAccount(10);
     const transaction: TransactionEventDto = {
-      wallet: '123A',
+      wallet: code,
       type: TransactionType.CREDIT,
       event: EventType.DEPOSIT,
       amount: 20,
+      description: 'Deposit internet bank',
       timestamp,
     };
     controller.updateBalance(transaction);
-    expect(updateBalanceService.updateBalance).toHaveBeenCalledWith(
-      transaction,
-    );
+    expect(controller.updateBalance).toHaveBeenCalledWith(transaction);
   });
 });

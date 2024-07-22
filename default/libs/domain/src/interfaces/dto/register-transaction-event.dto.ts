@@ -12,7 +12,7 @@ export class RegisterTransactionEventDto {
    * @memberof RegisterTransactionEventDto
    */
   @ApiProperty({
-    description: 'Tipo de transação [1 - CREDIT, -1 - DEBIT, 0 - CANCEL]',
+    description: 'Tipo de transação [1: CREDIT, -1: DEBIT]',
     type: 'TransactionType',
     enum: TransactionType,
   })

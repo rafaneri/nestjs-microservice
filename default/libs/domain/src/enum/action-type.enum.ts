@@ -5,4 +5,5 @@ export enum ActionType {
   GET_BALANCE = 'getBalance',
   UPDATE_BALANCE = 'updateBalance',
   LIST_STATEMENT = 'listStatement',
+  WALLET_UPDATE = 'walletUpdate',
 }

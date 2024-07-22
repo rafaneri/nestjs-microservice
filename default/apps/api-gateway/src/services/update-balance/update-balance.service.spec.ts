@@ -5,7 +5,6 @@ import {
   ActionType,
   EventType,
   RegisterTransactionEventDto,
-  TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
 
@@ -41,7 +40,7 @@ describe('UpdateBalanceService', () => {
 
     service.updateBalance(wallet, transaction);
 
-    const expectedPayload: TransactionEventDto = {
+    const expectedPayload = {
       wallet,
       amount: transaction.amount,
       type: transaction.type,

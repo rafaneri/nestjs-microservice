@@ -1,7 +1,8 @@
-import { modelOptions, prop, Severity } from '@typegoose/typegoose';
+import { modelOptions, prop, Ref, Severity } from '@typegoose/typegoose';
 import { EventType, TransactionType } from '../enum';
 import { TransactionInterface } from '../interfaces';
 import { Entity } from './entity';
+import { Wallet } from './wallet';
 
 @modelOptions({ options: { allowMixed: Severity.ALLOW } })
 export class Transaction extends Entity implements TransactionInterface {
@@ -10,11 +11,8 @@ export class Transaction extends Entity implements TransactionInterface {
     Object.assign(this, data);
   }
 
-  /**
-   * @description Identificador amigavel da carteira
-   */
-  @prop({ index: 1 })
-  wallet: string;
+  @prop({ index: 1, type: () => Wallet, excludeIndexes: true })
+  wallet: Wallet;
 
   @prop()
   type: TransactionType;
@@ -26,5 +24,11 @@ export class Transaction extends Entity implements TransactionInterface {
   amount: number;
 
   @prop()
+  description: string;
+
+  @prop()
   timestamp: number;
+
+  @prop()
+  reference?: Ref<Transaction>;
 }

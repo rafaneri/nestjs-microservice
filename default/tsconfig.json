@@ -17,6 +17,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
     "paths": {
       "@wallet/domain": [
         "libs/domain/src"
@@ -35,6 +36,18 @@
       ],
       "@wallet/repository/*": [
         "libs/repository/src/*"
+      ],
+      "@wallet/microservice-utils": [
+        "libs/microservice-utils/src"
+      ],
+      "@wallet/microservice-utils/*": [
+        "libs/microservice-utils/src/*"
+      ],
+      "@wallet/validate-events": [
+        "libs/validate-events/src"
+      ],
+      "@wallet/validate-events/*": [
+        "libs/validate-events/src/*"
       ]
     }
   }

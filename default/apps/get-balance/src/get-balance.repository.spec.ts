@@ -2,6 +2,7 @@ import { TestingModule, Test } from '@nestjs/testing';
 import { GetBalanceRepository } from './get-balance.repository';
 import { MongoRepository, RepositoryModule } from '@wallet/repository';
 import { Wallet } from '@wallet/domain';
+import { generateRandomAccount } from '../../../jest.setup';
 
 describe('GetBalanceRepository', () => {
   let service: GetBalanceRepository;
@@ -27,7 +28,7 @@ describe('GetBalanceRepository', () => {
   });
 
   it('should return balance when wallet exists', async () => {
-    const walletCode = 'existing_wallet';
+    const walletCode = generateRandomAccount(10);
     const repository = new MongoRepository(Wallet);
     await repository.create({ code: walletCode, balance: 100 });
     const balance = await service.getBalance(walletCode);

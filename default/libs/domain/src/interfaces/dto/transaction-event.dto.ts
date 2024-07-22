@@ -6,13 +6,35 @@ import { RegisterTransactionEventDto } from './register-transaction-event.dto';
  */
 export class TransactionEventDto extends RegisterTransactionEventDto {
   /**
-   * @description Identificador da carteira
+   * @description Identificador amigavel da carteira
    * @type {string}
    * @memberof TransactionEventDtoInterface
    */
   @ApiProperty({
     description: 'Identificador amigavel da carteira',
-    type: 'ObjectId',
+    type: 'string',
   })
   wallet: string;
+
+  /**
+   * @description Id da transação de referência (cancelamento)
+   * @type {string}
+   * @memberof TransactionEventDtoInterface
+   */
+  @ApiProperty({
+    description: 'Descrição da transação',
+    type: 'string',
+  })
+  description: string;
+
+  /**
+   * @description Id da transação de referência (cancelamento)
+   * @type {string}
+   * @memberof TransactionEventDtoInterface
+   */
+  @ApiProperty({
+    description: 'Identificador da transação de referência',
+    type: 'string',
+  })
+  reference?: string;
 }

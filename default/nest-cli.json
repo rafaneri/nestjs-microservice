@@ -72,6 +72,33 @@
       "compilerOptions": {
         "tsConfigPath": "libs/repository/tsconfig.lib.json"
       }
+    },
+    "wallet-updater": {
+      "type": "application",
+      "root": "apps/wallet-updater",
+      "entryFile": "main",
+      "sourceRoot": "apps/wallet-updater/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/wallet-updater/tsconfig.app.json"
+      }
+    },
+    "microservice-utils": {
+      "type": "library",
+      "root": "libs/microservice-utils",
+      "entryFile": "index",
+      "sourceRoot": "libs/microservice-utils/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/microservice-utils/tsconfig.lib.json"
+      }
+    },
+    "validate-events": {
+      "type": "library",
+      "root": "libs/validate-events",
+      "entryFile": "index",
+      "sourceRoot": "libs/validate-events/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/validate-events/tsconfig.lib.json"
+      }
     }
   }
 }
