@@ -5,7 +5,7 @@ import {
   RegisterTransactionEventDtoInterface,
   TransactionEventDtoInterface,
 } from '@wallet/domain';
-import { BrokerRemoteClientService } from '../broker-remote-cliente.service';
+import { BrokerRemoteClientService } from '../broker-remote-client.service';
 
 @Injectable()
 export class UpdateBalanceService extends BrokerRemoteClientService {
