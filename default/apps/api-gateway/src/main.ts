@@ -8,6 +8,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   await app.listen(configService.get<number>('PORT') || 3000);
-  Logger.log(`🔥 API Gateway Running`, 'APIGATEWAY');
+  Logger.log(`🔥 API Gateway is Running`, 'APIGATEWAY');
 }
 bootstrap();
