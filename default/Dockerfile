@@ -1,7 +1,7 @@
 FROM node:18-alpine AS base
 
 FROM base AS development 
-ARG APP 
+ARG APP
 ARG NODE_ENV=development 
 ENV NODE_ENV=${NODE_ENV} 
 WORKDIR /usr/src/app 
@@ -10,16 +10,9 @@ RUN npm install
 COPY . . 
 RUN npm run build ${APP} 
 
-FROM base AS production 
-ARG APP 
-ARG NODE_ENV=production 
-ENV NODE_ENV=${NODE_ENV} 
-WORKDIR /usr/src/app 
-COPY package*.json ./ 
-RUN npm install --prod
-COPY --from=development /usr/src/app/dist ./dist 
-
 # Add an env to save ARG
-EXPOSE 3000-4000
+ARG PORT
+ENV PORT=${PORT}
+EXPOSE ${PORT}
 ENV APP_MAIN_FILE=dist/apps/${APP}/main 
 CMD node ${APP_MAIN_FILE}

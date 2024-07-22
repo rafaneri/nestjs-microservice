@@ -1,82 +1,97 @@
+networks:
+  app-network:
+    driver: bridge
+
 services:
   api-gateway:
-    hostname: localhost
     container_name: api-gateway
     build:
       context: .
       target: development
+      args:
+        PORT: ${PORT}
     command: npm run start:dev api-gateway
-    develop:
-      watch:
-        - action: sync
-          path: ./apps/api-gateway
-          target: /usr/src/app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
+    depends_on:
+      - rabbitmq
+      - mongodb
+    networks:
+      - app-network
     ports:
       - ${PORT}:${PORT}
+
   get-balance:
-    hostname: localhost
     container_name: get-balance
     build:
       context: .
       target: development
+      args:
+        PORT: ${GET_BALANCE_PORT}
     command: npm run start:dev get-balance
-    develop:
-      watch:
-        - action: sync
-          path: ./apps/get-balance
-          target: /usr/src/app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
     ports:
       - ${GET_BALANCE_PORT}:${GET_BALANCE_PORT}
     expose:
       - ${GET_BALANCE_PORT}
+
   list-statement:
-    hostname: localhost
     container_name: list-statement
     build:
       context: .
       target: development
+      args:
+        PORT: ${LIST_STATEMENT_PORT}
     command: npm run start:dev list-statement
-    develop:
-      watch:
-        - action: sync
-          path: ./apps/get-balance
-          target: /usr/src/app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
     ports:
       - ${LIST_STATEMENT_PORT}:${LIST_STATEMENT_PORT}
     expose:
       - ${LIST_STATEMENT_PORT}
+
+  update-balance:
+    container_name: update-balance
+    build:
+      context: .
+      target: development
+    command: npm run start:dev update-balance
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    depends_on:
+      - rabbitmq
+      - mongodb
+    networks:
+      - app-network
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq-wallet
     ports:
       - 5672:5672
       - 15672:15672
+    networks:
+      - app-network
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+
   mongodb:
     image: mongo
     restart: always
@@ -89,6 +104,8 @@ services:
       - './db/init/:/docker-entrypoint-initdb.d/'
     ports:
       - 27017:27017
+    networks:
+      - app-network
 
 volumes:
   rabbitmq_data:
