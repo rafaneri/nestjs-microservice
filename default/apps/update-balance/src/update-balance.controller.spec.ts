@@ -1,6 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UpdateBalanceController } from './update-balance.controller';
 import { UpdateBalanceService } from './update-balance.service';
+import {
+  EventType,
+  TransactionEventDtoInterface,
+  TransactionType,
+} from '@wallet/domain';
 
 describe('UpdateBalanceController', () => {
   let updateBalanceController: UpdateBalanceController;
@@ -11,12 +16,29 @@ describe('UpdateBalanceController', () => {
       providers: [UpdateBalanceService],
     }).compile();
 
-    updateBalanceController = app.get<UpdateBalanceController>(UpdateBalanceController);
+    updateBalanceController = app.get<UpdateBalanceController>(
+      UpdateBalanceController,
+    );
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(updateBalanceController.getHello()).toBe('Hello World!');
-    });
+  it('should be defined', () => {
+    expect(updateBalanceController).toBeDefined();
+  });
+
+  it('should handle updateBalance with the correct arguments', async () => {
+    const updateBalanceService = { updateBalance: jest.fn() };
+    const controller = new UpdateBalanceController(updateBalanceService);
+    const timestamp = new Date().getTime();
+    const transaction: TransactionEventDtoInterface = {
+      wallet: '123A',
+      type: TransactionType.CREDIT,
+      event: EventType.DEPOSIT,
+      amount: 20,
+      timestamp,
+    };
+    controller.updateBalance(transaction);
+    expect(updateBalanceService.updateBalance).toHaveBeenCalledWith(
+      transaction,
+    );
   });
 });

@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { TransactionEventDtoInterface } from '@wallet/domain';
 
 @Injectable()
 export class UpdateBalanceService {
-  getHello(): string {
-    return 'Hello World!';
+  updateBalance(transaction: TransactionEventDtoInterface) {
+    console.log(transaction);
   }
 }
