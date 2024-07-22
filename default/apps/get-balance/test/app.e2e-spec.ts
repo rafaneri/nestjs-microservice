@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { GetBalanceModule } from './../src/get-balance.module';
 import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { ActionType } from '../../../libs/domain/src';
+import { ActionType } from '@wallet/domain';
 
 describe('GetBalanceController (e2e)', () => {
   let app: INestApplication;
@@ -38,7 +38,7 @@ describe('GetBalanceController (e2e)', () => {
   });
 
   it('test @MessagePattern(ActionType.GET_BALLANCE)', (done) => {
-    const response: Observable<any> = client.send(ActionType.GET_BALLANCE, '1');
+    const response: Observable<any> = client.send(ActionType.GET_BALANCE, '1');
 
     response.subscribe((balance) => {
       expect(balance).toBe(1);

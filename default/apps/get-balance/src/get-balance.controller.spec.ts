@@ -14,9 +14,11 @@ describe('GetBalanceController', () => {
     getBalanceController = app.get<GetBalanceController>(GetBalanceController);
   });
 
-  describe('root', () => {
-    it('should be defined', () => {
-      expect(getBalanceController.getBalance('1')).toBeDefined();
-    });
+  it('should be defined', () => {
+    expect(getBalanceController).toBeDefined();
+  });
+
+  it('should be "1"', () => {
+    expect(getBalanceController.getBalance('1')).toBe(1);
   });
 });

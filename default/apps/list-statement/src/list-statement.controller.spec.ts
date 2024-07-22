@@ -16,9 +16,13 @@ describe('ListStatementController', () => {
     );
   });
 
-  describe('root', () => {
-    it('should be defined', () => {
-      expect(listStatementController.listStatement('1')).toBeDefined();
-    });
+  it('should be defined', () => {
+    expect(listStatementController).toBeDefined();
+  });
+
+  it('should be greater than or equals to 0', () => {
+    expect(
+      listStatementController.listStatement('1').length,
+    ).toBeGreaterThanOrEqual(0);
   });
 });

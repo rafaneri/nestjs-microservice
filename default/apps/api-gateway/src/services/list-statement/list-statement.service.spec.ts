@@ -13,7 +13,7 @@ describe('ListStatementService', () => {
     }).compile();
 
     service = module.get<ListStatementService>(ListStatementService);
-    await module.init(); // Initialize the NestJS module
+    await module.init();
   });
 
   afterEach(async () => await module.close());
