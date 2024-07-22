@@ -36,13 +36,19 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
+$ npm run start (APP_NAME)
 
 # watch mode
-$ npm run start:dev
+$ npm run start:dev (APP_NAME)
 
 # production mode
-$ npm run start:prod
+$ npm run start:prod (APP_NAME)
+```
+
+or
+
+```bash
+$ docker compose up -d
 ```
 
 ## Test
