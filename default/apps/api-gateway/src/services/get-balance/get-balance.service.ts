@@ -16,6 +16,6 @@ export class GetBalanceService extends RemoteClientService {
   }
 
   public getBalance(wallet: string) {
-    return this.sendMessage<number, string>(ActionType.GET_BALLANCE, wallet);
+    return this.sendMessage<number, string>(ActionType.GET_BALANCE, wallet);
   }
 }
