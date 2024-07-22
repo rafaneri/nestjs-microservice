@@ -29,6 +29,12 @@
       ],
       "@wallet/bootstrap-config/*": [
         "libs/bootstrap-config/src/*"
+      ],
+      "@wallet/repository": [
+        "libs/repository/src"
+      ],
+      "@wallet/repository/*": [
+        "libs/repository/src/*"
       ]
     }
   }
