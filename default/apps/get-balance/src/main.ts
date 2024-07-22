@@ -17,7 +17,7 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        host: configService.get('TCP_HOST'),
+        host: configService.get('TCP_BALANCE_HOST'),
         port: configService.get('GET_BALANCE_PORT'),
       },
     },

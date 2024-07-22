@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { RemoteClientService } from '../remote-client.service';
 import { ClientOptions, Transport } from '@nestjs/microservices';
 import {
   ActionType,
   RegisterTransactionEventDtoInterface,
   TransactionEventDtoInterface,
 } from '@wallet/domain';
+import { BrokerRemoteClientService } from '../broker-remote-cliente.service';
 
 @Injectable()
-export class UpdateBalanceService extends RemoteClientService {
+export class UpdateBalanceService extends BrokerRemoteClientService {
   clientProxyOptions(): ClientOptions {
     return {
       transport: Transport.RMQ,
@@ -26,7 +26,7 @@ export class UpdateBalanceService extends RemoteClientService {
     wallet: string,
     transaction: RegisterTransactionEventDtoInterface,
   ) {
-    this.sendMessage<void, TransactionEventDtoInterface>(
+    this.emitMessage<void, TransactionEventDtoInterface>(
       ActionType.UPDATE_BALANCE,
       { wallet, ...transaction },
     );

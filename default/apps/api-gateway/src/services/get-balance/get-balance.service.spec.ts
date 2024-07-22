@@ -27,9 +27,9 @@ describe('GetBalanceService', () => {
     expect(result).toBe(1);
   });
 
-  // it('should throw an error if called with wrong parameters', () => {
-  //   expect(async () => {
-  //     await service.sendMessage('', 1);
-  //   }).rejects.toThrow();
-  // });
+  it('should throw an error if called with wrong parameters', () => {
+    expect(async () => {
+      await service.sendMessage('', 1);
+    }).rejects.toThrow();
+  });
 });

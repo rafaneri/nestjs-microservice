@@ -37,7 +37,7 @@ describe('UpdateBalanceService', () => {
       amount: 20,
       timestamp: new Date().getTime(),
     };
-    const sendMessageSpy = jest.spyOn(service, 'sendMessage');
+    const sendMessageSpy = jest.spyOn(service, 'emitMessage');
 
     service.updateBalance(wallet, transaction);
 
