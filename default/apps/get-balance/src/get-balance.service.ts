@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { GetBalanceRepository } from './get-balance.repository';
 
 @Injectable()
 export class GetBalanceService {
-  getBalance(wallet: string): number {
-    return 1;
+  constructor(readonly repository: GetBalanceRepository) {}
+  async getBalance(wallet: string): Promise<number> {
+    return this.repository.getBalance(wallet);
   }
 }

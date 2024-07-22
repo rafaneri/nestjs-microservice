@@ -14,14 +14,21 @@ export class MongoRepository<T extends Entity>
     this.model = getModelForClass<AnyParamConstructor<T>>(cl);
   }
 
+  name(): string {
+    return this.model.modelName;
+  }
+
   async create(data: T): Promise<T> {
     const entity = await this.model.create(data);
     return entity.toObject();
   }
 
+  async findOne(filter = {}, projection?: any): Promise<T | null> {
+    return this.model.findOne(filter, projection).lean<T | null>().exec();
+  }
+
   async findAll(filter = {}, projection?: any): Promise<T[]> {
-    const list = await this.model.find(filter, projection).lean<T[]>();
-    return list;
+    return this.model.find(filter, projection).lean<T[]>().exec();
   }
 
   async aggregate(pipeline: any[]): Promise<any> {

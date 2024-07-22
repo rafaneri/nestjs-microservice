@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ListStatementService } from './list-statement.service';
 import { ConfigModule } from '@nestjs/config';
+import { ActionType } from '@wallet/domain';
 
 describe('ListStatementService', () => {
   let service: ListStatementService;
@@ -22,9 +23,17 @@ describe('ListStatementService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should return length greater than 0 if called with "1"', async () => {
-    const result = await service.listStatement('1');
-    expect(result.length).toBeGreaterThanOrEqual(0);
+  it('should have been called sendMessage', async () => {
+    const wallet = 'validWalletId';
+    const mockSendMessage = jest.fn();
+    service.sendMessage = mockSendMessage;
+
+    await service.listStatement(wallet);
+
+    expect(mockSendMessage).toHaveBeenCalledWith(
+      ActionType.LIST_STATEMENT,
+      wallet,
+    );
   });
 
   it('should throw an error if called with wrong parameters', () => {

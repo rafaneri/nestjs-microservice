@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GetBalanceService } from './get-balance.service';
 import { ConfigModule } from '@nestjs/config';
+import { ActionType } from '@wallet/domain';
 
 describe('GetBalanceService', () => {
   let service: GetBalanceService;
@@ -22,9 +23,17 @@ describe('GetBalanceService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should return "1"', async () => {
-    const result = await service.getBalance('1');
-    expect(result).toBe(1);
+  it('should have been called sendMessage', async () => {
+    const wallet = 'validWalletId';
+    const mockSendMessage = jest.fn();
+    service.sendMessage = mockSendMessage;
+
+    await service.getBalance(wallet);
+
+    expect(mockSendMessage).toHaveBeenCalledWith(
+      ActionType.GET_BALANCE,
+      wallet,
+    );
   });
 
   it('should throw an error if called with wrong parameters', () => {

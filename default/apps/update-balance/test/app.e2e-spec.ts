@@ -5,7 +5,7 @@ import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import {
   ActionType,
   EventType,
-  TransactionEventDtoInterface,
+  TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
 
@@ -59,7 +59,7 @@ describe('UpdateBalanceController (e2e)', () => {
   });
 
   it('test @EventPattern(ActionType.UPDATE_BALLANCE)', () => {
-    const response = client.send<void, TransactionEventDtoInterface>(
+    const response = client.send<void, TransactionEventDto>(
       ActionType.UPDATE_BALANCE,
       {
         type: TransactionType.CREDIT,

@@ -4,8 +4,12 @@ import { ConfigService } from '@nestjs/config';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { BootstrapConfigModule } from '@wallet/bootstrap-config';
 import { GetBalanceModule } from './get-balance.module';
+import { isConnected } from '@wallet/repository';
 
 async function bootstrap() {
+  // Conectando ao banco de dados
+  await isConnected;
+  Logger.log(`🌨️  Database connected`, 'Mongoose');
   // Criando um contexto para utilizar o ConfigService
   const appContext = await NestFactory.createApplicationContext(
     BootstrapConfigModule,

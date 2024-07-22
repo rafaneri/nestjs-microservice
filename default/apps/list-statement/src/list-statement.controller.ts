@@ -8,7 +8,7 @@ export class ListStatementController {
   constructor(private readonly listStatementService: ListStatementService) {}
 
   @MessagePattern(ActionType.LIST_STATEMENT)
-  listStatement(wallet: string): TransactionInterface[] {
+  listStatement(wallet: string): Promise<TransactionInterface[]> {
     return this.listStatementService.listStatement(wallet);
   }
 }

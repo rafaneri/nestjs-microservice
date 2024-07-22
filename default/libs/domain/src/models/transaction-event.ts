@@ -4,8 +4,8 @@ import { TransactionInterface } from '../interfaces';
 import { Entity } from './entity';
 
 @modelOptions({ options: { allowMixed: Severity.ALLOW } })
-export class Transaction extends Entity implements TransactionInterface {
-  constructor(data?: Partial<Transaction>) {
+export class TransactionEvent extends Entity implements TransactionInterface {
+  constructor(data?: Partial<TransactionEvent>) {
     super();
     Object.assign(this, data);
   }

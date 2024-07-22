@@ -1,24 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import {
-  EventType,
-  TransactionInterface,
-  TransactionType,
-} from '@wallet/domain';
+import { TransactionInterface } from '@wallet/domain';
+import { ListStatementRepository } from './list-statement.repository';
 
 @Injectable()
 export class ListStatementService {
-  listStatement(wallet: string): TransactionInterface[] {
-    return [
-      {
-        wallet,
-        amount: 100,
-        type: TransactionType.CREDIT,
-        event: EventType.DEPOSIT,
-        timestamp: new Date().getTime(),
-        _id: wallet,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ];
+  constructor(readonly repository: ListStatementRepository) {}
+  listStatement(wallet: string): Promise<TransactionInterface[]> {
+    return this.repository.listStatement(wallet);
   }
 }

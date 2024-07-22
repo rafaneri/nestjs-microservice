@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ClientOptions, Transport } from '@nestjs/microservices';
 import {
   ActionType,
-  RegisterTransactionEventDtoInterface,
-  TransactionEventDtoInterface,
+  RegisterTransactionEventDto,
+  TransactionEventDto,
 } from '@wallet/domain';
 import { BrokerRemoteClientService } from '../broker-remote-client.service';
 
@@ -24,9 +24,9 @@ export class UpdateBalanceService extends BrokerRemoteClientService {
 
   public updateBalance(
     wallet: string,
-    transaction: RegisterTransactionEventDtoInterface,
+    transaction: RegisterTransactionEventDto,
   ) {
-    this.emitMessage<void, TransactionEventDtoInterface>(
+    this.emitMessage<void, TransactionEventDto>(
       ActionType.UPDATE_BALANCE,
       { wallet, ...transaction },
     );

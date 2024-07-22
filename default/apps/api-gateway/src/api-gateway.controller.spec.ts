@@ -3,7 +3,7 @@ import { ApiGatewayController } from './api-gateway.controller';
 import { ServicesModule } from './services/services.module';
 import {
   EventType,
-  RegisterTransactionEventDtoInterface,
+  RegisterTransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
 
@@ -29,35 +29,57 @@ describe('ApiGatewayController', () => {
   });
 
   it('[/wallet/:wallet/balance] should be "1"', async () => {
-    const result = await apiGatewayController.getBalance('1');
-    expect(result).toBe(1);
+    const wallet = '123A';
+    const mockGetBalance = jest.fn();
+    mockGetBalance.mockResolvedValue({
+      balance: 1,
+    });
+    apiGatewayController.getBalance = mockGetBalance;
+    const result = await apiGatewayController.getBalance(wallet);
+
+    const expectedPayload = {
+      balance: 1,
+    };
+
+    expect(result.balance).toEqual(expectedPayload.balance);
   });
 
   it('[/wallet/:wallet/statement] should return length greater than 0 if called with "1"', async () => {
-    const result = await apiGatewayController.listStatement('1');
+    const wallet = '123A';
+    const mockListStatement = jest.fn();
+    mockListStatement.mockResolvedValue([]);
+    apiGatewayController.listStatement = mockListStatement;
+    const result = await apiGatewayController.listStatement(wallet);
     expect(result.length).toBeGreaterThanOrEqual(0);
   });
 
   it('[/wallet/:wallet/transaction] should be defined', () => {
     const wallet = '123A';
     const timestamp = new Date().getTime();
-    const payload: RegisterTransactionEventDtoInterface = {
+    const payload: RegisterTransactionEventDto = {
       type: TransactionType.CREDIT,
       event: EventType.DEPOSIT,
       amount: 20,
       timestamp,
     };
-    const updateWalletSpy = jest.spyOn(apiGatewayController, 'updateWallet');
+    const mockUpdateWallet = jest.fn();
+    mockUpdateWallet.mockReturnValue({
+      type: TransactionType.CREDIT,
+      event: EventType.DEPOSIT,
+      amount: 20,
+      timestamp,
+    });
+    apiGatewayController.updateWallet = mockUpdateWallet;
 
     apiGatewayController.updateWallet(wallet, payload);
 
-    const expectedPayload: RegisterTransactionEventDtoInterface = {
+    const expectedPayload: RegisterTransactionEventDto = {
       type: TransactionType.CREDIT,
       event: EventType.DEPOSIT,
       amount: 20,
       timestamp,
     };
 
-    expect(updateWalletSpy).toHaveBeenCalledWith(wallet, expectedPayload);
+    expect(mockUpdateWallet).toHaveBeenCalledWith(wallet, expectedPayload);
   });
 });

@@ -3,7 +3,7 @@ import { UpdateBalanceController } from './update-balance.controller';
 import { UpdateBalanceService } from './update-balance.service';
 import {
   EventType,
-  TransactionEventDtoInterface,
+  TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
 
@@ -29,7 +29,7 @@ describe('UpdateBalanceController', () => {
     const updateBalanceService = { updateBalance: jest.fn() };
     const controller = new UpdateBalanceController(updateBalanceService);
     const timestamp = new Date().getTime();
-    const transaction: TransactionEventDtoInterface = {
+    const transaction: TransactionEventDto = {
       wallet: '123A',
       type: TransactionType.CREDIT,
       event: EventType.DEPOSIT,

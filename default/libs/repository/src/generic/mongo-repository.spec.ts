@@ -1,16 +1,7 @@
 import { Entity } from '@wallet/domain';
 import { MongoRepository } from './mongo-repository';
-import { connect, connection } from 'mongoose';
 
 describe('MongoRepository', () => {
-  beforeAll(async () => {
-    connect(global.__MONGOD__.getUri(), { autoIndex: true, autoCreate: true });
-  });
-
-  afterAll(async () => {
-    await connection.close();
-  });
-
   it('should save a valid data object when provided', async () => {
     const data = new Entity();
     const repository = new MongoRepository(Entity);
@@ -26,6 +17,13 @@ describe('MongoRepository', () => {
     ]);
     const all = await repository.findAll();
     expect(all.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('should return one object from list', async () => {
+    const repository = new MongoRepository(Entity);
+    const data = await repository.create(new Entity());
+    const entity = await repository.findOne({ createdAt: data.createdAt });
+    expect(entity.createdAt).toEqual(data.createdAt);
   });
 
   it('should be updated with a new updatedAt value', async () => {

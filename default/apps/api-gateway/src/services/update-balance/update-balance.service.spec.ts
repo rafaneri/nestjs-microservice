@@ -4,8 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import {
   ActionType,
   EventType,
-  RegisterTransactionEventDtoInterface,
-  TransactionEventDtoInterface,
+  RegisterTransactionEventDto,
+  TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
 
@@ -31,7 +31,7 @@ describe('UpdateBalanceService', () => {
 
   it('should handle sendMessage with the correct arguments', async () => {
     const wallet = '123A';
-    const transaction: RegisterTransactionEventDtoInterface = {
+    const transaction: RegisterTransactionEventDto = {
       type: TransactionType.CREDIT,
       event: EventType.DEPOSIT,
       amount: 20,
@@ -41,7 +41,7 @@ describe('UpdateBalanceService', () => {
 
     service.updateBalance(wallet, transaction);
 
-    const expectedPayload: TransactionEventDtoInterface = {
+    const expectedPayload: TransactionEventDto = {
       wallet,
       amount: transaction.amount,
       type: transaction.type,

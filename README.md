@@ -21,6 +21,8 @@ The API Gateway provides three endpoints for clients to interact with:
 
 Each endpoint executes the action of a corresponding microservice.
 
+The swagger json is available on [(http://localhost:3000/swagger/json)]
+
 ## Technologies
 
 - **NodeJS**: The runtime environment.
@@ -39,6 +41,7 @@ Each endpoint executes the action of a corresponding microservice.
 
 Make sure you have the following installed on your machine:
 
+- NodeJS v18
 - Docker
 
 ### Installation
@@ -59,7 +62,7 @@ Make sure you have the following installed on your machine:
 To start the application, run the following command:
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 This will start all the necessary services including the API Gateway, the microservices, RabbitMQ, and MongoDB.

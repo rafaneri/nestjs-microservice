@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { TransactionEventDtoInterface } from '@wallet/domain';
+import { TransactionEventDto } from '@wallet/domain';
+import { UpdateBalanceRepository } from './update-balance.repository';
 
 @Injectable()
 export class UpdateBalanceService {
-  updateBalance(transaction: TransactionEventDtoInterface) {
-    console.log(transaction);
+  constructor(readonly repository: UpdateBalanceRepository) {}
+  updateBalance(transaction: TransactionEventDto) {
+    this.repository.updateBalance(transaction);
   }
 }
