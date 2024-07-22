@@ -7,7 +7,7 @@ import { ActionType } from '@wallet/domain';
 export class GetBalanceController {
   constructor(private readonly getBalanceService: GetBalanceService) {}
 
-  @MessagePattern(ActionType.GET_BALLANCE)
+  @MessagePattern(ActionType.GET_BALANCE)
   getBalance(wallet: string): number {
     return this.getBalanceService.getBalance(wallet);
   }
