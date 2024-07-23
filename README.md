@@ -16,7 +16,7 @@ The project consists of the following applications:
 
 The API Gateway provides three endpoints for clients to interact with:
 
-- **Get Balance**: Fetches the balance of an account.
+- **Get Balance**: Fetches the balance of an account. (Create a new account if the account code does not exists)
 - **List Statement**: Retrieves the statement of an account.
 - **Update Balance**: Register and dispatch transactions update on account.
 - **Wallet Updater**: Summarize, update balance, and manage statements for an account.
