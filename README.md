@@ -7,9 +7,9 @@ This project demonstrates how to create and use microservices using the NestJS f
 The project consists of the following applications:
 
 1. **API Gateway**: Routes requests to the respective microservices.
-2. **Get Balance**: A microservice based on TCP transport to obtain the account balance.
-3. **List Statement**: A microservice based on TCP transport to obtain the account statement.
-4. **Update Balance**: A microservice that uses RabbitMQ as a broker to register and dispatch events update for an account.
+2. **Get Balance**: A microservice-based on TCP transport to obtain the account balance.
+3. **List Statement**: A microservice-based on TCP transport to obtain the account statement.
+4. **Update Balance**: A microservice that uses RabbitMQ as a broker to register and dispatch event updates for an account.
 5. **Wallet Updater**: A microservice that uses RabbitMQ as a broker to update the account balance and statements.
 
 ## Endpoints
@@ -19,11 +19,11 @@ The API Gateway provides three endpoints for clients to interact with:
 - **Get Balance**: Fetches the balance of an account.
 - **List Statement**: Retrieves the statement of an account.
 - **Update Balance**: Register and dispatch transactions update on account.
-- **Wallet Updater**: Summarize, really update balance, manage statements for an account.
+- **Wallet Updater**: Summarize, update balance, and manage statements for an account.
 
 Each endpoint executes the action of a corresponding microservice.
 
-The swagger json is available on [(http://localhost:3000/swagger/json)]
+The swagger json is available on [[aqui](http://localhost:3000/swagger/json)](http://localhost:3000/swagger/json)
 
 ## Technologies
 
@@ -35,7 +35,8 @@ The swagger json is available on [(http://localhost:3000/swagger/json)]
 
 ## Project Architecture
 
-<img width="880" alt="image" src="https://github.com/user-attachments/assets/7b175450-9e29-44ae-b040-9d5782b81e0e">
+![Arquitetura drawio](https://github.com/user-attachments/assets/40b9f8ae-10f5-46f5-9197-db9117d0b44a)
+
 
 ## Getting Started
 
@@ -80,6 +81,13 @@ Once the application is running, you can access the endpoints provided by the AP
 ### Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any changes.
+
+### Improvements
+
+- **Exception handler**
+- **Fault tolerance**
+- **Observability**
+- **Exhaustive tests**
 
 ### License
 
