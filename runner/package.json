@@ -1,0 +1,19 @@
+{
+  "name": "runner",
+  "version": "1.0.0",
+  "description": "Test Runner For Microservices",
+  "main": "index.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Test",
+    "Runner"
+  ],
+  "author": "Rafael Neri",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
