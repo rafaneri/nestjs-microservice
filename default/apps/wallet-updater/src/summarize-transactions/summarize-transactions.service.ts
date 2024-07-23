@@ -26,8 +26,8 @@ export class SummarizeTransactionsService {
       3,
       { date: -1 },
     );
-    wallet.sumarizedBallance = lastSummaries;
-    wallet = await this.walletRepository.update(wallet._id, wallet);
-    return wallet;
+    await this.walletRepository.update(wallet._id, {
+      sumarizedBallance: lastSummaries,
+    });
   }
 }
