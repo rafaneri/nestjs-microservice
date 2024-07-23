@@ -1,5 +1,12 @@
 {
   "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleNameMapper": {
+    "^@wallet/domain(|/.*)$": "<rootDir>/../../../libs/domain/src/$1",
+    "^@wallet/bootstrap-config(|/.*)$": "<rootDir>/../../../libs/bootstrap-config/src/$1",
+    "^@wallet/repository(|/.*)$": "<rootDir>/../../../libs/repository/src/$1",
+    "^@wallet/microservice-utils(|/.*)$": "<rootDir>/../../../libs/microservice-utils/src/$1",
+    "^@wallet/validate-events(|/.*)$": "<rootDir>/../../../libs/validate-events/src/$1"
+  },
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
