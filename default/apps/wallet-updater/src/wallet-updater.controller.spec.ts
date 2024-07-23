@@ -10,7 +10,7 @@ import { UpdateWalletBalanceService } from './update-wallet-balance/update-walle
 import { ValidateEventsService } from '@wallet/validate-events';
 import { ManageTransactionService } from './manage-transaction/manage-transaction.service';
 import { RepositoryModule } from '@wallet/repository';
-import { generateRandomAccount } from '../../../jest.setup';
+import { generateRandomAccount } from '../../utils/utils';
 import { SummarizeTransactionsService } from './summarize-transactions/summarize-transactions.service';
 
 describe('WalletUpdaterController', () => {

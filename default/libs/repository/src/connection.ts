@@ -1,8 +1,10 @@
 import { connect, connection, set } from 'mongoose';
+import { MONGO_URL, MONGO_DATABASE } from '../../../apps/environments';
 
 set('strictQuery', false);
-connect(process.env.MONGO_URL, {
-  dbName: process.env.MONGO_DATABASE,
+
+connect(MONGO_URL, {
+  dbName: MONGO_DATABASE,
   autoIndex: true,
   autoCreate: true,
 });

@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UpdateBalanceRepository } from './update-balance.repository';
 import { EventType, TransactionType, Wallet } from '@wallet/domain';
 import { RepositoryModule, RepositoryService } from '@wallet/repository';
-import { generateRandomAccount } from '../../../jest.setup';
+import { generateRandomAccount } from '../../utils/utils';
 
 describe('UpdateBalanceRepositoryService', () => {
   let service: UpdateBalanceRepository;

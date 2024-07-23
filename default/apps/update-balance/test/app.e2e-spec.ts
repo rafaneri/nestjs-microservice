@@ -8,9 +8,9 @@ import {
   TransactionEventDto,
   TransactionType,
 } from '@wallet/domain';
-import { generateRandomAccount } from '../../../jest.setup';
+import { generateRandomAccount } from '../../utils/utils';
 
-describe('UpdateBalanceController (e2e)', () => {
+describe('UpdateBalanceController (e2e) - This test needs a rabbitmq and mongo db container running', () => {
   let app: INestApplication;
   let client: ClientProxy;
 

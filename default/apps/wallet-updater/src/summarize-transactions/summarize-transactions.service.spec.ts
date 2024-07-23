@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SummarizeTransactionsService } from './summarize-transactions.service';
 import { RepositoryService } from '@wallet/repository';
 import { TransactionType, EventType, Wallet } from '@wallet/domain';
-import { generateRandomAccount } from '../../../../jest.setup';
+import { generateRandomAccount } from '../../../utils/utils';
 
 describe('SummarizeTransactionsService', () => {
   let service: SummarizeTransactionsService;

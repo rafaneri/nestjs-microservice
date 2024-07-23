@@ -4,7 +4,7 @@ import request from 'supertest';
 import { ApiGatewayModule } from './../src/api-gateway.module';
 import { EventType, TransactionType } from '@wallet/domain';
 
-describe('ApiGatewayController (e2e)', () => {
+describe('ApiGatewayController (e2e) - This test works only with the microservices running', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

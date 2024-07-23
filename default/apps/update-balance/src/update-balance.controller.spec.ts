@@ -8,7 +8,7 @@ import {
 } from '@wallet/domain';
 import { UpdateBalanceRepository } from './update-balance.repository';
 import { RepositoryModule } from '@wallet/repository';
-import { generateRandomAccount } from '../../../jest.setup';
+import { generateRandomAccount } from '../../utils/utils';
 import {
   ValidateEventsModule,
   ValidateEventsService,

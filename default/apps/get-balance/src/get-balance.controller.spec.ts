@@ -4,7 +4,7 @@ import { GetBalanceService } from './get-balance.service';
 import { MongoRepository, RepositoryModule } from '@wallet/repository';
 import { Wallet } from '@wallet/domain';
 import { GetBalanceRepository } from './get-balance.repository';
-import { generateRandomAccount } from '../../../jest.setup';
+import { generateRandomAccount } from '../../utils/utils';
 
 describe('GetBalanceController', () => {
   let getBalanceController: GetBalanceController;

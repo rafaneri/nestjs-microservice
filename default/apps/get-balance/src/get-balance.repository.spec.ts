@@ -2,7 +2,7 @@ import { TestingModule, Test } from '@nestjs/testing';
 import { GetBalanceRepository } from './get-balance.repository';
 import { MongoRepository, RepositoryModule } from '@wallet/repository';
 import { Wallet } from '@wallet/domain';
-import { generateRandomAccount } from '../../../jest.setup';
+import { generateRandomAccount } from '../../utils/utils';
 
 describe('GetBalanceRepository', () => {
   let service: GetBalanceRepository;

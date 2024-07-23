@@ -3,8 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import { ListStatementModule } from './../src/list-statement.module';
 import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import { ActionType, TransactionInterface } from '@wallet/domain';
+import { generateRandomAccount } from '../../utils/utils';
 
-describe('ListStatementController (e2e)', () => {
+describe('ListStatementController (e2e) - This test needs a mongo db container running', () => {
   let app: INestApplication;
   let client: ClientProxy;
 
@@ -37,9 +38,10 @@ describe('ListStatementController (e2e)', () => {
   });
 
   it('test @MessagePattern(ActionType.LIST_STATEMENT)', (done) => {
+    const code = generateRandomAccount(10);
     const response = client.send<TransactionInterface[], string>(
       ActionType.LIST_STATEMENT,
-      '1',
+      code,
     );
 
     response.subscribe((list) => {

@@ -4,8 +4,9 @@ import { GetBalanceModule } from './../src/get-balance.module';
 import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { ActionType } from '@wallet/domain';
+import { generateRandomAccount } from '../../utils/utils';
 
-describe('GetBalanceController (e2e)', () => {
+describe('GetBalanceController (e2e) - This test needs a mongo db container running', () => {
   let app: INestApplication;
   let client: ClientProxy;
 
@@ -38,10 +39,11 @@ describe('GetBalanceController (e2e)', () => {
   });
 
   it('test @MessagePattern(ActionType.GET_BALLANCE)', (done) => {
-    const response: Observable<any> = client.send(ActionType.GET_BALANCE, '1');
+    const code = generateRandomAccount(10);
+    const response: Observable<any> = client.send(ActionType.GET_BALANCE, code);
 
-    response.subscribe((balance) => {
-      expect(balance).toBe(1);
+    response.subscribe((data) => {
+      expect(data.balance).toBe(0);
       done();
     });
   });

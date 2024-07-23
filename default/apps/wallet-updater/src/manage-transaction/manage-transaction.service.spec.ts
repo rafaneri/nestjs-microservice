@@ -7,7 +7,7 @@ import {
   Wallet,
 } from '@wallet/domain';
 import { RepositoryService } from '@wallet/repository';
-import { generateRandomAccount } from '../../../../jest.setup';
+import { generateRandomAccount } from '../../../utils/utils';
 
 describe('ManageTransactionService', () => {
   let service: ManageTransactionService;
